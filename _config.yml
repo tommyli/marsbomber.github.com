@@ -1,0 +1,20 @@
+title: "marsbomber"
+url: "http://blog.elinkmedia.net.au"
+author: "Jim Li"
+email: "jimli@elinkmedia.net.au"
+description: "The personal blog of marsbomber."
+
+auto: false
+source: .
+paginate: 5
+paginate_files:
+ - index.html
+
+permalink: /:year/:month/:day/:title
+
+markdown: rdiscount
+pygments: true
+
+exclude:
+  - README.markdown
+  - _drafts

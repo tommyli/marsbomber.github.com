@@ -1,4 +1,4 @@
---- 
+---
 layout: post
 title: Setup local PHP development environment on Windows
 wordpress_id: 36
@@ -18,24 +18,25 @@ Download the latest precompiled Xdebug DLL from http://www.xdebug.org/download.p
 We need to tell our PHP installation to use Xdebug. There are 2 php.ini files come with XAMPP, <em>"C:\xampp\php\php.ini"</em> and <em>"C:\xampp\apache\bin\php.ini"</em>. The file under <em>"C:\xampp\"</em> controls the command line PHP. Obviously the php.ini under <em>"C:\xampp\apache\bin\"</em> controls the Apache PHP module. For some reason, enabling Xdebug for the Apache PHP module will lead to unexpected Apache server crashes. So I only have Xdebug enabled for my command line PHP. 2 reasons for this. One is that I really do not have time to figure out why it's not working for my Apache PHP module. Second is my motivation of installing Xdebug at the first place. I'm using Zend Framework for my PHP project development, I get a comprehensive error stack trace from the framework already. I want to install Xdebug, so that when I run my PHP unit tests, I can let PHPUnit generate a nice looking code coverage report (Xdebug is required for this job).
 
 So ... to configure Xdebug for my command line PHP, I need to modify <em>"C:\xampp\php\php.ini"</em>. In the ini file, find sections for "[Zend]", comment out all lines under it. Find section "[XDebug]", comment out all lines, and put in this
-
-[sourcecode language="plain"][XDebug]
+{% highlight apache %}
+[XDebug]
 xdebug.remote_enable=1
-xdebug.remote_host=&amp;quot;localhost&amp;quot;
+xdebug.remote_host="localhost"
 xdebug.remote_port=9000
-xdebug.remote_handler=&amp;quot;dbgp&amp;quot;
-zend_extension_ts=&amp;quot;C:\xampp\php\ext\php_xdebug-2.0.5-5.2.dll&amp;quot;[/sourcecode]
+xdebug.remote_handler="dbgp"
+zend_extension_ts="C:\xampp\php\ext\php_xdebug-2.0.5-5.2.dll"
+{% endhighlight %}
 
 <strong>Okay. we now can move onto PHPUnit</strong>
 
 We can download and install PHPUnit with XAMPP's pear support. Open windows command prompt as administrator and do the following
-
-[sourcecode language="plain"]
+{% highlight bash %}
 cd c:\xampp\php
 go-pear.bat
 PEAR_ENV.reg
 pear channel-discover pear.phpunit.de
-pear install phpunit/PHPUnit[/sourcecode]
+pear install phpunit/PHPUnit
+{% endhighlight %}
 
 We should now have PHPUnit download and configured at <em>"C:\xampp\php\PEAR\PHPUnit\"</em>.
 

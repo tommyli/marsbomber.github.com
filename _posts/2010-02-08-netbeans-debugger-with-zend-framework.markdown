@@ -1,4 +1,4 @@
---- 
+---
 layout: post
 title: Netbeans debugger with Zend Framework
 wordpress_id: 231
@@ -11,17 +11,17 @@ The IDE I use is Netbeans (6.8 on Mac). It's shipped with a built-in debugger, w
 
 So ... we first need to make sure our PHP is running Xdebug instead of Zend. I have explained how I have Xdebug setup on my XAMPP stack on Mac from one of my previous posts, <a href="http://blog.elinkmedia.net.au/2010/02/04/setup-phpundercontrol-on-snow-leopard/" target="_blank">Setup phpUnderControl on Snow Leopard</a>. We can verify whether Xdebug is setup properly by loading up our phpinfo page. We should see something like this (notice the last line prints Xdebug)
 
-<a href="http://blog.elinkmedia.net.au/wp-content/uploads/2010/02/xdebug-php.png"><img class="aligncenter size-full wp-image-232" title="xdebug-php" src="http://blog.elinkmedia.net.au/wp-content/uploads/2010/02/xdebug-php.png" alt="" width="609" height="86" /></a>Now, let's go to Netbeans. Netbeans out of the box listens on port 9000, which is the exact port number we set our Xdebug remote_port to in our previous step. This means if we are not running our application with mod_rewrite, we now should be able to set a breakpoint in our code, hit the debug icon, and have everything going.
+<img class="aligncenter size-full wp-image-232" title="xdebug-php" src="/images/posts/xdebug-php.png" alt="" width="609" height="86" />Now, let's go to Netbeans. Netbeans out of the box listens on port 9000, which is the exact port number we set our Xdebug remote_port to in our previous step. This means if we are not running our application with mod_rewrite, we now should be able to set a breakpoint in our code, hit the debug icon, and have everything going.
 
 But ... there's always a but. When we develop Zend Framework based applications, in fact any applications that utilising mod_rewrite. We will run into trouble. We'll find the debugger always hits the index controller, index action. To overcome this, we need to do the following.
 
 Go to the Zend Framework application's project property in Netbeans. Go to the "Run Configuration" option. Click on Advanced. For "Debug URL", choose "Ask Every Time".
 
-<a href="http://blog.elinkmedia.net.au/wp-content/uploads/2010/02/zf-project-property1.png"><img class="aligncenter size-full wp-image-238" title="zf-project-property" src="http://blog.elinkmedia.net.au/wp-content/uploads/2010/02/zf-project-property1.png" alt="" width="721" height="428" /></a>
+<img class="aligncenter size-full wp-image-238" title="zf-project-property" src="/images/posts/zf-project-property1.png" alt="" width="721" height="428" />
 
 Now, if we want to debug the email action from the index controller, when we hit the debug icon in Netbeans, it'll pop up a dialog box asking us to type in the debug URL.
 
-<a href="http://blog.elinkmedia.net.au/wp-content/uploads/2010/02/set-debug-url1.png"><img class="aligncenter size-full wp-image-235" title="set-debug-url" src="http://blog.elinkmedia.net.au/wp-content/uploads/2010/02/set-debug-url1.png" alt="" width="648" height="294" /></a>
+<img class="aligncenter size-full wp-image-235" title="set-debug-url" src="/images/posts/set-debug-url1.png" alt="" width="648" height="294" />
 
 Once we Ok the dialog, Firefox will fire up (after you install the Netbeans debugger), and off you go!
 

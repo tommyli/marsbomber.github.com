@@ -1,4 +1,4 @@
---- 
+---
 layout: post
 title: Compile APC for XAMPP on Snow Leopard
 wordpress_id: 275
@@ -12,27 +12,22 @@ To overcome this issue, we need to manually compile APC from source and here is 
 First, download APC source from <a href="http://pecl.php.net/package/APC" target="_blank">http://pecl.php.net/package/APC</a> and double click on the tar file within finder will unzip it.
 
 Then
-
-[code]
-
+{% highlight bash %}
 cd ~/Downloads/APC-3.1.3p1/APC-3.1.3p1/
 phpize
-MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS=&quot;-arch i386 -g -Os  -pipe -no-cpp-precomp&quot; CCFLAGS=&quot;-arch i386 -g -Os  -pipe&quot; CXXFLAGS=&quot;-arch i386 -g -Os  -pipe&quot; LDFLAGS=&quot;-arch i386 -bind_at_load&quot; ./configure --enable-apc --with-apxs --with-php-config=/Applications/XAMPP/xamppfiles/bin/php-config-5.3.1
+MACOSX_DEPLOYMENT_TARGET=10.6 CFLAGS="-arch i386 -g -Os  -pipe -no-cpp-precomp" CCFLAGS="-arch i386 -g -Os  -pipe" CXXFLAGS="-arch i386 -g -Os  -pipe" LDFLAGS="-arch i386 -bind_at_load" ./configure --enable-apc --with-apxs --with-php-config=/Applications/XAMPP/xamppfiles/bin/php-config-5.3.1
 make
 sudo cp modules/apc.so /Applications/XAMPP/xamppfiles/lib/php/php-5.3.1/extensions/no-debug-non-zts-20090626/.
-
-[/code]
+{% endhighlight %}
 
 We should see no errors and we should have the new APC so file copied into our PHP extension directory.
 
 Next, enable APC from php.ini by adding the following 2 lines
 
-[code]
-
+{% highlight apache %}
 extension=apc.so
 apc.shm_size = 32
-
-[/code]
+{% endhighlight %}
 
 Now if you do php -m from command line, you'll see APC listed as a loaded module.
 

@@ -1,4 +1,4 @@
---- 
+---
 layout: post
 title: ZF authentication using Doctrine
 wordpress_id: 131
@@ -16,27 +16,26 @@ However here, I want to show you an alternative approach to solve the same probl
 To autoload the ZendX_Doctrine_Auth_Adapter class file, obviously you need to include the file in the correct directory inside the "library" directory. So that is "library/ZendX/Doctrine/Auth/Adapter.php".
 
 Now let's look at some code. Please note that I am only showing topic-related code here, all other security checking, error checking code have been taken out.
-
-[php]
+{% highlight php %}
 class LoginController extends Zend_Controller_Action
 {
     public function loginAction()
     {
         // collect the data from the user
-        $loginUsername = $this-&gt;getRequest()-&gt;getParam('username', '');
-        $loginPassword = $this-&gt;getRequest()-&gt;getParam('password', '');
+        $loginUsername = $this->getRequest()->getParam('username', '');
+        $loginPassword = $this->getRequest()->getParam('password', '');
 
         $myAuth = Zend_Auth::getInstance();
 
         // do the authentication
-        $authAdapter = $this-&gt;_getAuthAdapter($loginUsername, $loginPassword);
-        $result = $myAuth-&gt;authenticate($authAdapter);
-        if (!$result-&gt;isValid()) {
+        $authAdapter = $this->_getAuthAdapter($loginUsername, $loginPassword);
+        $result = $myAuth->authenticate($authAdapter);
+        if (!$result->isValid()) {
             // take care of invalid login
         } else {
             // empty password
-            $identity = $authAdapter-&gt;getResultRowObject(null, 'password');
-            $myAuth-&gt;getStorage()-&gt;write($identity);
+            $identity = $authAdapter->getResultRowObject(null, 'password');
+            $myAuth->getStorage()->write($identity);
 
             // all good, do you redirect or whatever
         }
@@ -48,16 +47,15 @@ class LoginController extends Zend_Controller_Action
 
         $encryptedPassword = Model_Utility::encryptPassword($password);
 
-        $authAdapter-&gt;setTableName('Model_User u')
-            -&gt;setIdentityColumn('u.username')
-            -&gt;setCredentialColumn('u.password')
-            -&gt;setIdentity($username)
-            -&gt;setCredential($encryptedPassword);
+        $authAdapter->setTableName('Model_User u')
+            ->setIdentityColumn('u.username')
+            ->setCredentialColumn('u.password')
+            ->setIdentity($username)
+            ->setCredential($encryptedPassword);
 
         return $authAdapter;
     }
-
-[/php]
+{% endhighlight %}
 
 Ok. Most of the code should be pretty self explanatory. The authentication is done with the following assumptions.
 <ul>

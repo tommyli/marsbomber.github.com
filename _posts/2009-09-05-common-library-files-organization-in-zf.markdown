@@ -1,4 +1,4 @@
---- 
+---
 layout: post
 title: Common library files organization in ZF
 wordpress_id: 71
@@ -8,7 +8,7 @@ date: 2009-09-05 18:07:29 +10:00
 Once you have used ZF for a couple of projects, you will find that there are library files actually live independent to whichever application you are implementing. These common library files should be reusable by all you ZF projects. Now the question is where you should place these files so that a typical ZF project can make use of them without a glitch?
 
 I have described my ZF project structure in an earlier post <a href="http://blog.elinkmedia.net.au/2009/08/27/my-zend-framework-project-setup/" target="_blank">HERE</a>, and now I want to elaborate a bit more on folder "library/MyApp", because that's where I keep my common library files.
-<p style="text-align: left;"><img class="size-full wp-image-72 aligncenter" title="ZF_Lib_MyApp" src="http://blog.elinkmedia.net.au/wp-content/uploads/2009/09/ZF_Lib_MyApp.jpg" alt="ZF_Lib_MyApp" width="187" height="126" />I have a rather simple version shown here. Basically only 3 things to look at.</p>
+<p style="text-align: left;"><img class="size-full wp-image-72 aligncenter" title="ZF_Lib_MyApp" src="/images/posts/ZF_Lib_MyApp.jpg" alt="ZF_Lib_MyApp" width="187" height="126" />I have a rather simple version shown here. Basically only 3 things to look at.</p>
 <strong>Let's start with "MyApp/View/Helper". </strong>
 
 This is the place where I keep all my project independent View Helper files. Things like
@@ -19,15 +19,14 @@ This is the place where I keep all my project independent View Helper files. Thi
 	<li>etc</li>
 </ul>
 I assume you already know that you need to follow ZF's naming conversion for these helpers files to make  autoloading painless. For example, the baseUrl view helper, you will end up with something like this
-
-[php]
-
+{% highlight php %}
 class MyApp_View_Helper_BaseUrl {
- function baseUrl() {
- $fc = Zend_Controller_Front::getInstance();
- return $this-&gt;_baseUrl =  $fc-&gt;getBaseUrl();
- }
-}[/php]
+  function baseUrl() {
+    $fc = Zend_Controller_Front::getInstance();
+    return $this-&gt;_baseUrl =  $fc-&gt;getBaseUrl();
+  }
+}
+{% endhighlight %}
 
 <strong>Next, let's look at ViewSetup.php file under "MyApp/Controller/Plugin"</strong>
 
@@ -42,31 +41,36 @@ I use this hook to set my application HTML head title. ZF allows you to set a se
 </ul>
 To make a use of this ViewSetup file, I have this too init function in my bookstrap
 
-[php]protected function _initCustomLibraryNamespaces() {
- $loader = Zend_Loader_Autoloader::getInstance();
- $loader-&gt;registerNamespace('MyApp_');
- }
+{% highlight php %}
+protected function _initCustomLibraryNamespaces() {
+  $loader = Zend_Loader_Autoloader::getInstance();
+  $loader->registerNamespace('MyApp_');
+}
 
- protected function _initViewHelpers() {
- $frontController = Zend_Controller_Front::getInstance();
+protected function _initViewHelpers() {
+  $frontController = Zend_Controller_Front::getInstance();
 
- $frontController-&gt;registerPlugin(new MyApp_Controller_Plugin_ViewSetup(), 98);
- $this-&gt;bootstrap('layout');
- }[/php]
+  $frontController-&gt;registerPlugin(new MyApp_Controller_Plugin_ViewSetup(), 98);
+  $this-&gt;bootstrap('layout');
+}
+{% endhighlight %}
 
 <strong>OK, last bit, let's talk about "MyApp/Controller/Action.php"</strong>
 
 A bit background first, I recently just started looking into Ruby on Rails as a self learning course. One RoR programming principle is DRY (Don't Repeat Yourself). The same motivation made me implement this "MyApp/ControllerAction.php" file. There are a lot of common things you do with pretty much all your application controller classes. Things like authentication, maybe ACL (depends on your application specific requirement), flash messenger, logger, etc. I hate repeat myself, that's why I have these common tasks or methods implemented here. So ... the Action.php class declaration goes like this
-
-[php]class MyApp_Controller_Action extends Zend_Controller_Action[/php]
+{% highlight php %}
+class MyApp_Controller_Action extends Zend_Controller_Action
+{% endhighlight %}
 
 It actually extends the Zend_Controller_Action, so that it should not work any unexpected at all.
 and a typical application controller will have something like this
-
-[php]class IndexController extends MyApp_Controller_Action[/php]
+{% highlight php %}
+class IndexController extends MyApp_Controller_Action
+{% endhighlight %}
 
 and of course if a certain controller does NOT require any extras implemented in the customized Action.php file, you can make it easily fall back to something like this
-
-[php]class ErrorController extends Zend_Controller_Action[/php]
+{% highlight php %}
+class ErrorController extends Zend_Controller_Action
+{% endhighlight %}
 
 That's it! Hope it helps and let me know if you have better ways.

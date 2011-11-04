@@ -1,4 +1,4 @@
---- 
+---
 layout: post
 title: Integrate Zend_Tool with Netbeans 6.9 beta
 wordpress_id: 269
@@ -11,44 +11,36 @@ Here is how I did it on OS X with XAMPP.
 
 First, I included Zend Framework library via a PEAR repository hosted on Google Code.
 
-[code]
-
+{% highlight bash %}
 sudo pear channel-discover zend.googlecode.com/svn
 sudo pear install zend/zend
-
-[/code]
+{% endhighlight %}
 
 Completing the above will make Zend Framework available through PEAR, which should be in your PHP include_path.
 
 Next, I downloaded and extracted the minimal Zend Framework package. Then I did
 
-[code]
-
+{% highlight bash %}
 cd ~/Downloads/ZendFramework-1.10.3-minimal/bin
 sudo cp zf.php /Applications/XAMPP/xamppfiles/bin/zf.php
 sudo cp zf.sh /Applications/XAMPP/xamppfiles/bin/zf
-
-[/code]
+{% endhighlight %}
 
 After this, I can run zf from command line without having any errors. So ... I did this
 
-[code]
-
+{% highlight bash %}
 zf --setup storage-directory
 zf --setup config-file
+{% endhighlight %}
 
-[/code]
-
-I can now download the latest Netbeans 6.9 beta and do the normal install. After installation, start up Netbeans, go to "Netbeans" -&gt; "Preferences" from the menu bar. Navigate to the "PHP" -&gt; "Zend" section. Enter "/Applications/XAMPP/xamppfiles/bin/zf" into the "Zend script" input box. Then click on "Register Provider" button.
+I can now download the latest Netbeans 6.9 beta and do the normal install. After installation, start up Netbeans, go to "Netbeans" -> "Preferences" from the menu bar. Navigate to the "PHP" -> "Zend" section. Enter "/Applications/XAMPP/xamppfiles/bin/zf" into the "Zend script" input box. Then click on "Register Provider" button.
 
 Now Netbeans should have updated the zf config file, which I created by running the "zf --setup config-file" command. And at this stage, I can create Zend Framework based projects and run "zf" commands to manipulate my projects within Netbeans.
 
 However, if I jump back to the terminal shell, I would notice the good old "zf" command is broken and complaining it cannot find a file called "NetBeansCommandsProvider.php". Since I still want my terminal command line zf script working, I did this
 
-[code]
-
+{% highlight bash %}
 sudo ln -s /Applications/NetBeans/NetBeans\ 6.9\ Beta.app/Contents/Resources/NetBeans/php/zend/NetBeansCommandsProvider.php /Applications/XAMPP/xamppfiles/lib/php/pear/NetBeansCommandsProvider.php
-
-[/code]
+{% endhighlight %}
 
 Now I am happy. Hope someone find it's useful

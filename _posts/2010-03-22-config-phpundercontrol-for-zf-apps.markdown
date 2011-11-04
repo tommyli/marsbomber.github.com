@@ -1,4 +1,4 @@
---- 
+---
 layout: post
 title: Config phpUnderControl for ZF based applications
 wordpress_id: 263
@@ -10,8 +10,7 @@ I recently reinstalled my MacBook Pro, and it proves that my earlier post on <a 
 Now, I want to go into the details a bit to show the configurations I have done to use phpUnderControl to do continuos integration for my Zend Framework based applications. The testing application I used here is the ZFDoctrine12 project I've created. You could pull down the source code of it from <a href="http://github.com/marsbomber/zf-with-doctrine/" target="_blank">my github project</a>.
 
 First, I create the necessary folder structure for a new phpUnderControl project, as well as the ant build file.
-
-[code]
+{% highlight bash %}
 sudo mkdir /opt/cruisecontrol/projects/zfdoctrine12
 sudo mkdir /opt/cruisecontrol/projects/zfdoctrine12/source
 sudo mkdir /opt/cruisecontrol/projects/zfdoctrine12/build
@@ -20,89 +19,86 @@ sudo mkdir /opt/cruisecontrol/projects/zfdoctrine12/build/coverage
 sudo mkdir /opt/cruisecontrol/projects/zfdoctrine12/build/logs
 sudo mkdir /opt/cruisecontrol/projects/zfdoctrine12/build/php-code-browser
 sudo touch /opt/cruisecontrol/projects/zfdoctrine12/build.xml
-[/code]
+{% endhighlight %}
 
 Next, the ant build file content. You can see it's fairly minimal, but you should get the idea and know how to beef it up
-
-[xml]
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;project name=&quot;zfdoctrine12&quot; default=&quot;build&quot; basedir=&quot;.&quot;&gt;
-  &lt;target name=&quot;build&quot; depends=&quot;php-codesniffer,phpunit&quot;/&gt;
-  &lt;target name=&quot;php-codesniffer&quot;&gt;
-    &lt;exec executable=&quot;phpcs&quot; dir=&quot;${basedir}/source&quot; output=&quot;${basedir}/build/logs/checkstyle.xml&quot; error=&quot;/var/tmp//checkstyle.error.log&quot;&gt;
-      &lt;arg line=&quot;-n --report=checkstyle --standard=ZEND application&quot;/&gt;
-    &lt;/exec&gt;
-  &lt;/target&gt;
-  &lt;target name=&quot;phpunit&quot;&gt;
-    &lt;exec executable=&quot;phpunit&quot; dir=&quot;${basedir}/source/tests&quot; failonerror=&quot;on&quot;&gt;
-      &lt;arg line=&quot; --log-junit ${basedir}/build/logs/phpunit.xml --coverage-clover ${basedir}/build/logs/phpunit.coverage.xml --coverage-html ${basedir}/build/coverage&quot;/&gt;
-    &lt;/exec&gt;
-  &lt;/target&gt;
-&lt;/project&gt;
-[/xml]
+{% highlight xml %}
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="zfdoctrine12" default="build" basedir=".">
+  <target name="build" depends="php-codesniffer,phpunit"/>
+  <target name="php-codesniffer">
+    <exec executable="phpcs" dir="${basedir}/source" output="${basedir}/build/logs/checkstyle.xml" error="/var/tmp//checkstyle.error.log">
+      <arg line="-n --report=checkstyle --standard=ZEND application"/>
+    </exec>
+  </target>
+  <target name="phpunit">
+    <exec executable="phpunit" dir="${basedir}/source/tests" failonerror="on">
+      <arg line=" --log-junit ${basedir}/build/logs/phpunit.xml --coverage-clover ${basedir}/build/logs/phpunit.coverage.xml --coverage-html ${basedir}/build/coverage"/>
+    </exec>
+  </target>
+</project>
+{% endhighlight %}
 
 Next, I want to clone the project from my local git repository into my phpUnderControl monitored project directory. To do this, we do
-
-[code]
+{% highlight bash %}
 cd /opt/cruisecontrol/projects/zfdoctrine12/source/
 sudo git clone ~/Sites/zfdoctrine12/ .
-[/code]
+{% endhighlight %}
 
 You can see that I'm only cloning the project from my local project repository, however this can be easily changed to utilise a remote git repository. e.g. repositories hosted on github.
 
 I admit that after doing the git clone, I had to manually create and copy a couple of files. This was because of my .gitignore file from my local repository. So, go to the .gitignore file from your project repo, and do whatever changes that make sense to you.
 
 Now, let's setup the phpUnderControl config.xml file, to make phpUnderControl become aware of our newly created project. Add the following XML snippet to your /opt/cruisecontrol/config.xml.
-
-[xml]
-  &lt;project name=&quot;zfdoctrine12&quot;&gt;
-    &lt;listeners&gt;
-      &lt;currentbuildstatuslistener file=&quot;logs/${project.name}/status.txt&quot;/&gt;
-    &lt;/listeners&gt;
-    &lt;modificationset quietperiod=&quot;60&quot;&gt;
-      &lt;git localWorkingCopy=&quot;projects/${project.name}/source/&quot; /&gt;
-    &lt;/modificationset&gt;
-    &lt;bootstrappers&gt;
-      &lt;gitbootstrapper localWorkingCopy=&quot;projects/${project.name}/source/&quot; /&gt;
-    &lt;/bootstrappers&gt;
-    &lt;schedule interval=&quot;300&quot;&gt;
-      &lt;ant anthome=&quot;apache-ant-1.7.0&quot; buildfile=&quot;projects/${project.name}/build.xml&quot;/&gt;
-    &lt;/schedule&gt;
-    &lt;log dir=&quot;logs/${project.name}&quot;&gt;
-      &lt;merge dir=&quot;projects/${project.name}/build/logs/&quot;/&gt;
-    &lt;/log&gt;
-    &lt;publishers&gt;
-      &lt;artifactspublisher
-        dir=&quot;projects/${project.name}/build/api&quot;
-        dest=&quot;artifacts/${project.name}&quot;
-        subdirectory=&quot;api&quot;/&gt;
-      &lt;artifactspublisher
-        dir=&quot;projects/${project.name}/build/coverage&quot;
-        dest=&quot;artifacts/${project.name}&quot;
-        subdirectory=&quot;coverage&quot;/&gt;
-      &lt;execute
-        command=&quot;phpcb
-                --log projects/${project.name}/build/logs
-                --source projects/${project.name}/source
-                --output projects/${project.name}/build/php-code-browser&quot;/&gt;
-      &lt;artifactspublisher
-        dir=&quot;projects/${project.name}/build/php-code-browser&quot;
-        dest=&quot;artifacts/${project.name}&quot;
-        subdirectory=&quot;php-code-browser&quot;/&gt;
-      &lt;execute command=&quot;/Applications/XAMPP/xamppfiles/bin/phpuc graph logs/${project.name} artifacts/${project.name}&quot;/&gt;
-      &lt;email
-        buildresultsurl=&quot;http://localhost:8080/cruisecontrol/buildresults/zfdoctrine12&quot;
-        mailhost=&quot;smtp.gmail.com&quot;
-        mailport=&quot;465&quot;
-        usessl=&quot;true&quot;
-        username=&quot;USERNAME&quot;
-        password=&quot;PASSWORD&quot;
-        returnaddress=&quot;SENDER_EMAIL&quot;&gt;
-        &lt;always address=&quot;RECIPIENT_EMAIL&quot;/&gt;
-      &lt;/email&gt;
-    &lt;/publishers&gt;
-  &lt;/project&gt;
-[/xml]
+{% highlight xml %}
+<project name="zfdoctrine12">
+  <listeners>
+    <currentbuildstatuslistener file="logs/${project.name}/status.txt"/>
+  </listeners>
+  <modificationset quietperiod="60">
+    <git localWorkingCopy="projects/${project.name}/source/" />
+  </modificationset>
+  <bootstrappers>
+    <gitbootstrapper localWorkingCopy="projects/${project.name}/source/" />
+  </bootstrappers>
+  <schedule interval="300">
+    <ant anthome="apache-ant-1.7.0" buildfile="projects/${project.name}/build.xml"/>
+  </schedule>
+  <log dir="logs/${project.name}">
+    <merge dir="projects/${project.name}/build/logs/"/>
+  </log>
+  <publishers>
+    <artifactspublisher
+      dir="projects/${project.name}/build/api"
+      dest="artifacts/${project.name}"
+      subdirectory="api"/>
+    <artifactspublisher
+      dir="projects/${project.name}/build/coverage"
+      dest="artifacts/${project.name}"
+      subdirectory="coverage"/>
+    <execute
+      command="phpcb
+              --log projects/${project.name}/build/logs
+              --source projects/${project.name}/source
+              --output projects/${project.name}/build/php-code-browser"/>
+    <artifactspublisher
+      dir="projects/${project.name}/build/php-code-browser"
+      dest="artifacts/${project.name}"
+      subdirectory="php-code-browser"/>
+    <execute command="/Applications/XAMPP/xamppfiles/bin/phpuc graph logs/${project.name} artifacts/${project.name}"/>
+    <email
+      buildresultsurl="http://localhost:8080/cruisecontrol/buildresults/zfdoctrine12"
+      mailhost="smtp.gmail.com"
+      mailport="465"
+      usessl="true"
+      username="USERNAME"
+      password="PASSWORD"
+      returnaddress="SENDER_EMAIL">
+      <always address="RECIPIENT_EMAIL"/>
+    </email>
+  </publishers>
+</project>
+{% endhighlight %}
 
 The above project config tells CruiseControl to look for VCS (git in this case) changes, if any changes are detected, a build will be triggered every 5 min. The result is then emailed out to a nominated email address.
 

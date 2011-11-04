@@ -1,4 +1,4 @@
---- 
+---
 layout: post
 title: File include cache in Zend Framework
 wordpress_id: 223
@@ -14,29 +14,29 @@ Problem ... Zend Framework uses many types of plugins, how do we efficiently tel
 Fix ... it's easy.
 
 Make the following extra line of config in your application config file
-
-[code]cache.classFileIncludeCache   = APPLICATION_PATH &quot;/../data/pluginLoaderCache.php&quot;[/code]
+{% highlight apache %}
+cache.classFileIncludeCache = APPLICATION_PATH "/../data/pluginLoaderCache.php"
+{% endhighlight %}
 
 Add the following code to your Bootstrap.php
+{% highlight php %}
+/**
+ * Setup include file cache to increase performance
+ *
+ * @return void
+ * @author Jim Li
+ */
+protected function _initFileInlcudeCache()
+{
+    $classFileIncCacheOptions = $this->getOption('cache');
+    $classFileIncCache = $classFileIncCacheOptions['classFileIncludeCache'];
 
-[php]
-  /**
-     * Setup include file cache to increase performance
-     *
-     * @return void
-     * @author Jim Li
-     */
-    protected function _initFileInlcudeCache()
-    {
-        $classFileIncCacheOptions = $this-&gt;getOption('cache');
-        $classFileIncCache = $classFileIncCacheOptions['classFileIncludeCache'];
-
-        if(file_exists($classFileIncCache)) {
-            include_once $classFileIncCache;
-        }
-        Zend_Loader_PluginLoader::setIncludeFileCache($classFileIncCache);
+    if(file_exists($classFileIncCache)) {
+        include_once $classFileIncCache;
     }
-[/php]
+    Zend_Loader_PluginLoader::setIncludeFileCache($classFileIncCache);
+}
+{% endhighlight %}
 
 Attention: make sure the "/data/" directory is writable by your web server.
 

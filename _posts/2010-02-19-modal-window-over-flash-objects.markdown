@@ -1,4 +1,4 @@
---- 
+---
 layout: post
 title: Modal window over flash objects
 wordpress_id: 250
@@ -9,12 +9,12 @@ I've been working on a WordPress site for a client. All pretty straight forward 
 
 The issue surfaced when we replaced the site banner with a flash (this is of course IE specific ...). The popup modal window slides behind the flash object. This turned out to be a common issue and the fix is simple.
 
-[code]
-&lt;object classid=&quot;clsid:D27CDB6E....&quot; width=&quot;1151&quot; height=&quot;209&quot; ... &gt;
+{% highlight html %}
+<object classid="clsid:D27CDB6E...." width="1151" height="209" ... >
     .... you other flash params stuff ...
-    &lt;param name=&quot;wmode&quot; value=&quot;transparent&quot;&gt;
-&lt;/object&gt;
-[/code]
+    <param name="wmode" value="transparent">
+</object>
+{% endhighlight %}
 
 The "wmode" transparent is the key!
 

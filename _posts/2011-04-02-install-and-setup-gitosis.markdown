@@ -36,7 +36,7 @@ sudo adduser --system --shell /bin/sh --gecos 'git version control' --group --di
 From your local computer, generate (if not done before) and copy the public SSH key to the VPS server. Place and name it as "/tmp/id_rsa.pub", then
 
 {% highlight bash %}
-sudo -H -u git gitosis-init &lt; /tmp/id_rsa.pub
+sudo -H -u git gitosis-init < /tmp/id_rsa.pub
 sudo chmod 755 /home/git/repositories/gitosis-admin.git/hooks/post-update
 {% endhighlight %}
 
@@ -75,7 +75,7 @@ Obtain Bob's public SSH key and put it under ~/VpsAdmin/gitosis-admin/keydir. Gi
 
 {% highlight bash %}
 cd ~/VpsAdmin/gitosis-admin
-git commit -a -m &quot;create new repository and setup access for Bob&quot;
+git commit -a -m "create new repository and setup access for Bob"
 git push
 {% endhighlight %}
 
@@ -88,7 +88,7 @@ cd new_shared_project
 git init
 git remote add origin git@YOUR_SERVER:new_shared_project.git
 git add .
-git commit -a -m &quot;initial import&quot;
+git commit -a -m "initial import"
 git push origin master:refs/heads/master
 {% endhighlight %}
 

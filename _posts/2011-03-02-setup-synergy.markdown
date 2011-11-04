@@ -11,7 +11,7 @@ I then created a couple of automator applications, one on my MBP, the other on t
 
 On the Synergy server (my MBP). I created an automator application. Drag "Run Shell Script" into the workflow. The script I'm using is
 
-[code]
+{% highlight bash %}
 #!/bin/sh
 prog=(/PATH-TO-SYNERGY/synergys --no-daemon --config /PATH-TO-SYNERGY-CONF/synergy.conf)
 
@@ -19,16 +19,16 @@ prog=(/PATH-TO-SYNERGY/synergys --no-daemon --config /PATH-TO-SYNERGY-CONF/syner
 killall ${prog[0]##*/}
 
 ### Start the new client
-exec &quot;${prog[@]}&quot; -f &gt; /tmp/synergy.log 2&gt;&amp;1 &amp;
-[/code]
+exec "${prog[@]}" -f > /tmp/synergy.log 2>&1 &
+{% endhighlight %}
 
 Save the automator application into /Applications. Add the new application to account login items from System Preferences.
 
 Similarly, on the Synergy client (OS X Server) machine, repeat the above steps. Substitute the script content with
 
-[code]
-/PATH-TO-SYNERGY/synergyc -f SERVER-MACHINE-HOSTNAME &gt; /tmp/synergy.log 2&gt;&amp;1 &amp;
-[/code]
+{% highlight bash %}
+/PATH-TO-SYNERGY/synergyc -f SERVER-MACHINE-HOSTNAME > /tmp/synergy.log 2>&1 &
+{% endhighlight %}
 
 This is it. See if this helps you in any ways and let me know if the automation bit can be improved (I'm sure there are better ways to register startup processes on os x).
 

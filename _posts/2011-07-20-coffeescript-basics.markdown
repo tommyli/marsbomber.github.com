@@ -15,15 +15,15 @@ class Person
   my_name = null
 
   ### constructor ###
-  constructor: (name) -&gt;
+  constructor: (name) ->;
     my_name = name
 
   ### public instance method ###
-  speak: (saying)-&gt;
+  speak: (saying)->;
     alert "#{saying} #{fancy_name()}!"
  
   ### private instance method ###
-  fancy_name = -&gt;
+  fancy_name = ->;
     if my_name == "Jim"
       "Jimbob"
     else if my_name == "Dan"
@@ -32,7 +32,7 @@ class Person
       my_name
 
   ### class method ###
-  @feature: -&gt;
+  @feature: ->;
     alert "1 Person has only 1 head"
 
 Person.feature()

@@ -9,7 +9,7 @@ Rails 3.1 will support CoffeeScript out of the box. I gave the new boy in town a
 
 Here's a little play script I wrote to illustrate how a JavaScript class can be written in CoffeeScript
 
-[javascript]
+{% highlight javascript %}
 class Person
   ### private var ###
   my_name = null
@@ -20,29 +20,29 @@ class Person
 
   ### public instance method ###
   speak: (saying)-&gt;
-    alert &quot;#{saying} #{fancy_name()}!&quot;
+    alert "#{saying} #{fancy_name()}!"
  
   ### private instance method ###
   fancy_name = -&gt;
-    if my_name == &quot;Jim&quot;
-      &quot;Jimbob&quot;
-    else if my_name == &quot;Dan&quot;
-      &quot;DanDaMan&quot;
+    if my_name == "Jim"
+      "Jimbob"
+    else if my_name == "Dan"
+      "DanDaMan"
     else
       my_name
 
   ### class method ###
   @feature: -&gt;
-    alert &quot;1 Person has only 1 head&quot;
+    alert "1 Person has only 1 head"
 
 Person.feature()
-jim = new Person(&quot;Jim&quot;)
-jim.speak(&quot;Hi&quot;)
-[/javascript]
+jim = new Person("Jim")
+jim.speak("Hi")
+{% endhighlight %}
 
 The above CoffeeScript will be translated into the following JavaScript
 
-[javascript]
+{% highlight javascript %}
 var Person, jim;
 Person = (function() {
   /* private var */  var fancy_name, my_name;
@@ -53,25 +53,25 @@ Person = (function() {
   }
   /* public instance method */
   Person.prototype.speak = function(saying) {
-    return alert(&quot;&quot; + saying + &quot; &quot; + (fancy_name()) + &quot;!&quot;);
+    return alert("" + saying + " " + (fancy_name()) + "!");
   };
   /* private instance method */
   fancy_name = function() {
-    if (my_name === &quot;Jim&quot;) {
-      return &quot;Jimbob&quot;;
-    } else if (my_name === &quot;Dan&quot;) {
-      return &quot;DanDaMan&quot;;
+    if (my_name === "Jim") {
+      return "Jimbob";
+    } else if (my_name === "Dan") {
+      return "DanDaMan";
     } else {
       return my_name;
     }
   };
   /* class method */
   Person.feature = function() {
-    return alert(&quot;1 Person has only 1 head&quot;);
+    return alert("1 Person has only 1 head");
   };
   return Person;
 })();
 Person.feature();
-jim = new Person(&quot;Jim&quot;);
-jim.speak(&quot;Hi&quot;);
-[/javascript]
+jim = new Person("Jim");
+jim.speak("Hi");
+{% endhighlight %}

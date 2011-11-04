@@ -21,24 +21,24 @@ As for the implementation, it's scattered across many files. Here's my implement
 
 Gemfile
 
-[ruby]
-gem 'resque', :require =&gt; &quot;resque/server&quot;
+{% highlight ruby %}
+gem 'resque', :require => "resque/server"
 gem 'resque-heroku-autoscaler'
-[/ruby]
+{% endhighlight %}
 
 config/resque.yml
 
-[ruby]
+{% highlight ruby %}
 development: 127.0.0.1:6379
 test: 127.0.0.1:6379
-[/ruby]
+{% endhighlight %}
 
 config/initializers/resque.rb
 
-[ruby]
+{% highlight ruby %}
 require 'resque'
 
-heroku_environments = [&quot;staging&quot;, &quot;production&quot;]
+heroku_environments = ["staging", "production"]
 rails_root = ENV['RAILS_ROOT'] || File.dirname(__FILE__) + '/../..'
 rails_env = ENV['RAILS_ENV'] || 'development'
 
@@ -46,14 +46,14 @@ unless heroku_environments.include?(rails_env)
   resque_config = YAML.load_file(rails_root + '/config/resque.yml')
   Resque.redis = resque_config[rails_env]
 else
-  uri = URI.parse(ENV[&quot;REDISTOGO_URL&quot;])
-  Resque.redis = Redis.new(:host =&gt; uri.host, :port =&gt; uri.port, :password =&gt; uri.password)
+  uri = URI.parse(ENV["REDISTOGO_URL"])
+  Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 end
-[/ruby]
+{% endhighlight %}
 
 config/initializers/resque_heroku_autoscaler_setup.rb
 
-[ruby]
+{% highlight ruby %}
 require 'resque/plugins/resque_heroku_autoscaler'
 
 Resque::Plugins::HerokuAutoscaler.config do |c|
@@ -71,21 +71,21 @@ Resque::Plugins::HerokuAutoscaler.config do |c|
     c.scaling_disabled = true
   end
 end
-[/ruby]
+{% endhighlight %}
 
 app/models/membership_observer.rb
 
-[ruby]
-class MembershipObserver &lt; ActiveRecord::Observer
+{% highlight ruby %}
+class MembershipObserver < ActiveRecord::Observer
   def after_create(membership)
-    Resque.enqueue(MailerCallback, &quot;MyMailer&quot;, :welcome_email, membership.id)
+    Resque.enqueue(MailerCallback, "MyMailer", :welcome_email, membership.id)
   end
 end
-[/ruby]
+{% endhighlight %}
 
 app/models/mailer_callback.rb
 
-[ruby]
+{% highlight ruby %}
 require 'resque/plugins/resque_heroku_autoscaler'
 
 class MailerCallback
@@ -101,7 +101,7 @@ class MailerCallback
     mailer.constantize.send(email_type, args).deliver
   end
 end
-[/ruby]
+{% endhighlight %}
 
 Reference
 <ul>

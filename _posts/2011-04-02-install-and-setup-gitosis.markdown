@@ -11,45 +11,59 @@ SSH into the remote VPS machine,
 
 <strong>Step 1: Setup Git</strong>
 
-[code]sudo apt-get install git-core[/code]
+{% highlight bash %}
+sudo apt-get install git-core
+{% endhighlight %}
 
 <strong>Step 2: Setup Gitosis</strong>
 
-[code]sudo apt-get install python-setuptools
+{% highlight bash %}
+sudo apt-get install python-setuptools
 cd ~/downloads
 git clone git://eagain.net/gitosis.git
 cd gitosis
-sudo python setup.py install[/code]
+sudo python setup.py install
+{% endhighlight %}
 
 <strong>Step 3: Setup git user</strong>
 
-[code]sudo adduser --system --shell /bin/sh --gecos 'git version control' --group --disabled-password --home /home/git git[/code]
+{% highlight bash %}
+sudo adduser --system --shell /bin/sh --gecos 'git version control' --group --disabled-password --home /home/git git
+{% endhighlight %}
 
 <strong>Step 4: Set up Gitosis admin user access and init Gitosis admin repository</strong>
 
 From your local computer, generate (if not done before) and copy the public SSH key to the VPS server. Place and name it as "/tmp/id_rsa.pub", then
 
-[code]sudo -H -u git gitosis-init &lt; /tmp/id_rsa.pub
-sudo chmod 755 /home/git/repositories/gitosis-admin.git/hooks/post-update[/code]
+{% highlight bash %}
+sudo -H -u git gitosis-init &lt; /tmp/id_rsa.pub
+sudo chmod 755 /home/git/repositories/gitosis-admin.git/hooks/post-update
+{% endhighlight %}
 
 Up to this point, your have done all the works required on the VPS server. You will next jump back to your local machine and admin Gitosis from there.
 
 First thing first, let's clone the Gitosis admin repository, so that you could tweak any admin configuration settings locally and update your Gitosis server with a simple git push
 
-[code]cd ~/VpsAdmin
-git clone git@YOUR_SERVER:gitosis-admin.git[/code]
+{% highlight bash %}
+cd ~/VpsAdmin
+git clone git@YOUR_SERVER:gitosis-admin.git
+{% endhighlight %}
 
 Next you'll create a new project locally, push it to the Git server hosted on the VPS, and make the new project's remoto repository accessible by other team members.
 
 <strong>Step 1: Add new project to Gitosis admin config</strong>
 
-[code]vim ~/VpsAdmin/gitosis-admin/gitosis.conf[/code]
+{% highlight bash %}
+vim ~/VpsAdmin/gitosis-admin/gitosis.conf
+{% endhighlight %}
 
 Add a new config block to the bottom of the file, like this
 
-[code][group new_shared_project]
+{% highlight bash %}
+[group new_shared_project]
 members = jim bob
-writable = new_shared_project[/code]
+writable = new_shared_project
+{% endhighlight %}
 
 Note that "new_shared_project" will be your new project's remote Git repository name. "jim" in this case is yourself (Gitosis admin) and "bob" is your team member, who will also have access to this project. "jim" matches the name your used in your public key, which was used when setting up Gitosis from previous steps. "bob" matches the name, which your team member used in his public key, which will be used in the next step.
 
@@ -59,26 +73,32 @@ Obtain Bob's public SSH key and put it under ~/VpsAdmin/gitosis-admin/keydir. Gi
 
 <strong>Step 3: Commit changes and push it up to Gitosis server</strong>
 
-[code]cd ~/VpsAdmin/gitosis-admin
+{% highlight bash %}
+cd ~/VpsAdmin/gitosis-admin
 git commit -a -m &quot;create new repository and setup access for Bob&quot;
-git push[/code]
+git push
+{% endhighlight %}
 
 <strong>Step 4: Create new project and push it to remote Gitosis server</strong>
 
-[code]cd ~/Workspace
+{% highlight bash %}
+cd ~/Workspace
 rails new new_shared_project
 cd new_shared_project
 git init
 git remote add origin git@YOUR_SERVER:new_shared_project.git
 git add .
 git commit -a -m &quot;initial import&quot;
-git push origin master:refs/heads/master[/code]
+git push origin master:refs/heads/master
+{% endhighlight %}
 
 <strong>Step 5: Share the remote repository with your team member</strong>
 
 Team member Bob can access the remote repository from any computers that have his public SSH key installed
 
-[code]git clone git@YOUR_SERVER:new_shared_project.git[/code]
+{% highlight bash %}
+git clone git@YOUR_SERVER:new_shared_project.git
+{% endhighlight %}
 
 Reference
 <ul>

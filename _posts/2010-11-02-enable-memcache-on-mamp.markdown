@@ -16,14 +16,12 @@ I simply followed the steps to setup my local memcached service. However when I 
 5.  Download the stable version of memcache from PECL
 6.  Unpack the source and go into that directory from terminal
 7.  Run the following
-
-    {% highlight bash %}
-    jimli@Jim-Lis-MBP: phpize
-    jimli@Jim-Lis-MBP: CFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -g -Os' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -g -Os' ./configure --disable-dependancy-tracking --disable-shared -enable-static
-    jimli@Jim-Lis-MBP: make
-    jimli@Jim-Lis-MBP: sudo cp modules/memcache.so /Applications/MAMP/bin/php5.3/lib/php/extensions/no-debug-non-zts-20090626/.
-    {% endhighlight %}
-
+{% highlight bash %}
+jimli@Jim-Lis-MBP: phpize
+jimli@Jim-Lis-MBP: CFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -g -Os' LDFLAGS='-O3 -arch i386 -arch x86_64' CXXFLAGS='-O3 -fno-common -arch i386 -arch x86_64 -g -Os' ./configure --disable-dependancy-tracking --disable-shared -enable-static
+jimli@Jim-Lis-MBP: make
+jimli@Jim-Lis-MBP: sudo cp modules/memcache.so /Applications/MAMP/bin/php5.3/lib/php/extensions/no-debug-non-zts-20090626/.
+{% endhighlight %}
 8.  Enable memcache from php.ini, restart MAMP
 
 That's it. Hope you find it's useful.

@@ -14,4 +14,5 @@ end
 {% endhighlight %}
 
 1st, I learnt the gsub method could take a block as its second argument.
+
 2nd, inside the block, all regular expression back references could be used, e.g. $& for referencing all matching elements.

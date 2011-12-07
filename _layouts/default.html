@@ -13,12 +13,12 @@
     <link href="http://marsbomber.github.com/" rel="home" />
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-    <link type="text/css" rel="stylesheet" media="screen, projection" href="/css/screen.css" /> 
+    <link type="text/css" rel="stylesheet" media="screen, projection" href="/css/screen.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/css/custom.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js" ></script>
     <!--[if lt IE 8]>
       <link type="text/css" rel="stylesheet" media="screen, projection" href="/css/ie.css" />
-    <![endif]--> 
+    <![endif]-->
     <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -39,7 +39,7 @@
 	        s.parentNode.insertBefore(wf, s);
 	      })();
 	</script>
-  {% include google_analytics.html %}	
+  {% include google_analytics.html %}
   </head>
   <body>
     <div class="container">
@@ -51,44 +51,47 @@
         {{ content }}
       </div>
       <div class="span-5 last" id="sidebar">
-        <div class="sidebarbox"> 
-          <h4>Pages</h4> 
+        <div class="sidebarbox">
+          <h4>Pages</h4>
           <ul id="pages">
-	        <li>
+            <li>
               <a rel="bookmark" title="Home" href="{{ site.url }}/">Home</a>
             </li>
             <li>
               <a rel="bookmark" title="About" href="{{ site.url }}/about">About</a>
             </li>
+            <li>
+              <a rel="bookmark" title="Archives" href="{{ site.url }}/archives">Archives</a>
+            </li>
           </ul>
         </div>
-        <div class="sidebarbox"> 
-          <h4>Subscribe</h4> 
-          <ul> 
-            <li> 
-              <a title="RSS Feed" href="{{ site.url }}/feed" class="icon-link" id="feed-link">RSS</a> 
-            </li> 
-          </ul> 
-        </div> 
-        <div class="sidebarbox"> 
-          <h4>Me Elsewhere</h4> 
-          <ul> 
-            <li> 
-              <a rel="bookmark" title="Twitter" href="http://twitter.com/marsbomber" class="icon-link" id="twitter-link">Twitter</a> 
-            </li> 
-            <li> 
-              <a rel="bookmark" title="GitHub" href="http://github.com/marsbomber" class="icon-link" id="github-link">GitHub</a> 
-            </li> 
-          </ul> 
+        <div class="sidebarbox">
+          <h4>Subscribe</h4>
+          <ul>
+            <li>
+              <a title="RSS Feed" href="{{ site.url }}/feed" class="icon-link" id="feed-link">RSS</a>
+            </li>
+          </ul>
         </div>
-        <div class="sidebarbox"> 
-          <h4>Contact Me</h4> 
-          <ul> 
-            <li> 
-              <a rel="bookmark" title="Email" href="mailto:jimli@elinkmedia.net.au" class="icon-link" id="gmail-link">Gmail</a> 
-            </li> 
-          </ul> 
-        </div> 
+        <div class="sidebarbox">
+          <h4>Me Elsewhere</h4>
+          <ul>
+            <li>
+              <a rel="bookmark" title="Twitter" href="http://twitter.com/marsbomber" class="icon-link" id="twitter-link">Twitter</a>
+            </li>
+            <li>
+              <a rel="bookmark" title="GitHub" href="http://github.com/marsbomber" class="icon-link" id="github-link">GitHub</a>
+            </li>
+          </ul>
+        </div>
+        <div class="sidebarbox">
+          <h4>Contact Me</h4>
+          <ul>
+            <li>
+              <a rel="bookmark" title="Email" href="mailto:jimli@elinkmedia.net.au" class="icon-link" id="gmail-link">Gmail</a>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <footer class="span-21 last" id="footer">

@@ -1,0 +1,7 @@
+---
+layout: page
+title: Archives
+---
+  {% for post in site.posts %}
+      {{ post.date | date: "%Y-%m-%d" }}<a href="{{ site.url }}{{ post.url }}" title="{{ post.title | escape }}" rel="bookmark">{{ post.title }}</a>
+  {% endfor %}

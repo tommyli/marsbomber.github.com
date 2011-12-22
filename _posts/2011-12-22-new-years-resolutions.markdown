@@ -10,10 +10,10 @@ Let's look back first, and see what I have accomplished in 2011.
 * Work smart on my freelance works. Try getting recurring income.
 * <del>Rails 3 is out for a while now. I WILL make a pet RoR app this year!</del>
 * <del>Get myself into Test Driven Development and study Behaviour Driven Development.</del>
-* Keep spending quality time with family. At least 2 road trips.
+* <del>Keep spending quality time with family. At least 2 road trips.</del>
 * <del>Take over the duty of sending Oscar to his childcare (that is 3 mornings a week).</del>
 
-Okay! 4 out of 6 items are stiked out. We also had 1 road trip, and a holiday booked in Jan 2012. I would give myself a 5/6 for 2011. Not too bad!
+Okay! 5 out of 6 items are stiked out. Not too bad!
 
 Now, look forward. In 2012, here are the things I want to make happen.
 

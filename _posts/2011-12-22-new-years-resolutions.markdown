@@ -22,5 +22,6 @@ Now, look forward. In 2012, here are the things I want to make happen.
 * Finish off my Rails 3 side project.
 * Keep doing morning and afternoon childcare runs (3 days a week).
 * Family time! Again, at least 2 family trips.
+* EDITED: Do exercise to lose weight.
 
 This is it! I'll see how things are tracking by the end of 2012!

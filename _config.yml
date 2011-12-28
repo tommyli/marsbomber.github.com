@@ -6,7 +6,7 @@ description: "The personal blog of marsbomber."
 
 auto: false
 source: .
-paginate: 5
+paginate: 10
 paginate_files:
  - index.html
 

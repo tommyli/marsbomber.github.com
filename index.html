@@ -10,12 +10,13 @@ title: Home
 
     {{ post.content }}
 
-  <div class="meta">
-   <div class="published">
-      Published: {{ post.date | date: "%Y-%m-%d" }}
-   </div>
-  </div>
+    <div class="meta">
+      <div class="published">Published: {{ post.date | date: "%Y-%m-%d" }}</div>
 
+      <div class="tweet">
+        <a href="http://twitter.com/?status=Reading '{{ page.title }}' from http://marsbomber.github.com{{ page.url }} by @marsbomber" title="Tweet {{ page.title }}">Tweet</a> &amp; <a class="permalink" href="{{ site.url }}{{ page.url }}" rel="bookmark permalink" title="Permalink for {{ page.title }}">Permalink</a>
+      </div>
+    </div>
 
   </article>
 {% endfor %}
@@ -31,6 +32,6 @@ title: Home
 {% if paginator.next_page %}
   <a href='/page{{paginator.next_page}}' class='older'><h1>Older Posts</h1></a>
 {% endif %}
-  
+
   <div class='clear'></div>
 </div>

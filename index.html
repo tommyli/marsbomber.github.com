@@ -14,7 +14,7 @@ title: Home
       <div class="published">Published: {{ post.date | date: "%Y-%m-%d" }}</div>
 
       <div class="tweet">
-        <a href="http://twitter.com/?status=Reading '{{ page.title }}' from http://marsbomber.github.com{{ page.url }} by @marsbomber" title="Tweet {{ page.title }}">Tweet</a> &amp; <a class="permalink" href="{{ site.url }}{{ page.url }}" rel="bookmark permalink" title="Permalink for {{ page.title }}">Permalink</a>
+        <a href="http://twitter.com/?status=Reading '{{ post.title }}' from http://marsbomber.github.com{{ post.url }} by @marsbomber" title="Tweet {{ post.title }}">Tweet</a> &amp; <a class="permalink" href="{{ site.url }}{{ post.url }}" rel="bookmark permalink" title="Permalink for {{ post.title }}">Permalink</a>
       </div>
     </div>
 

@@ -1,0 +1,46 @@
+#intro {
+  text-align: center;
+}
+#intro > div {
+  padding-top: 24px;
+}
+.csstransforms #intro > div {
+  padding-top: 0;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  -webkit-transform: translate(0, -50%);
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -o-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+}
+#intro h1 {
+  position: static;
+  font-size: 84px;
+  font-weight: normal;
+  margin: 0 0 8px 0;
+  padding: 0 48px;
+  -webkit-transform: none;
+  -moz-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  transform: none;
+  font-family: "UltraRegular", Georgia, sans-serif;
+  color: #000;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+#intro h2 {
+  font-size: 24px;
+  letter-spacing: 2px;
+  color: #999;
+  font-weight: 100;
+  text-shadow: 1px 1px 1px #fff;
+}
+#intro hgroup {
+  margin-bottom: 32px;
+}
+#intro p {
+  padding-bottom: 10px;
+}

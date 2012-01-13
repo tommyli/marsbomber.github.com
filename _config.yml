@@ -18,3 +18,4 @@ pygments: true
 exclude:
   - README.markdown
   - _drafts
+  - presentations

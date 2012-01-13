@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PHP to Ruby</title>
+  <meta name="viewport" content="width=1024, user-scalable=no">
+
+  <!-- Replace path with correct path to deck.core.css. -->
+  <link rel="stylesheet" href="core/deck.core.css" type="text/css">
+
+  <!-- Any other extension CSS files go here. -->
+  <link rel="stylesheet" href="themes/style/web-2.0.css" type="text/css">
+  <link rel="stylesheet" href="themes/transition/horizontal-slide.css" type="text/css">
+  <link rel="stylesheet" href="extensions/navigation/deck.navigation.css" type="text/css">
+  <link rel="stylesheet" href="extensions/status/deck.status.css" type="text/css">
+
+  <!-- <link rel="stylesheet" href="http://imakewebthings.github.com/deck.js/introduction/introduction.css" type="text/css"> -->
+  <link rel="stylesheet" href="common.css" type="text/css">
+  <link rel="stylesheet" href="home.css" type="text/css">
+
+
+  <!-- Replace path with correct path to Modernizr file. -->
+  <script src="modernizr.custom.js"></script>
+</head>
+<body class="deck-container">
+<!-- <body class="introduction">
+<article class="deck-container"> -->
+
+<!-- Create any number of elements with class slide within the container -->
+
+<section class="slide" id="intro">
+  <div>
+    <hgroup>
+      <h1>php to ruby</h1>
+      <h2>Prepared by: Jim Li</h2>
+    </hgroup>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>Title</h2>
+  <p class="slide">This is my code</p>
+  <pre class="slide"><code>a = String.new
+b = a</code></pre>
+</section>
+<section class="slide">
+  <h2>Title</h2>
+  <p>This is my code</p>
+  <pre><code>a = String.new
+b = a</code></pre>
+</section>
+
+<!-- Other extension HTML snippets go here, at the bottom of the deck container. -->
+<!-- Navigation -->
+<a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+<a href="#" class="deck-next-link" title="Next">&#8594;</a>
+
+<!-- Status -->
+<p class="deck-status">
+  <span class="deck-status-current"></span> / <span class="deck-status-total"></span>
+</p>
+
+<!-- </article> -->
+
+
+<!-- Update these paths to point to the correct files. -->
+<script src="jquery-1.7.min.js"></script>
+<script src="core/deck.core.js"></script>
+
+<!-- Add any other extension JS files here -->
+<script src="extensions/navigation/deck.navigation.js"></script>
+<script src="extensions/status/deck.status.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script>
+  $(function() {
+    $.deck('.slide');
+  });
+</script>
+
+</body>
+</html>

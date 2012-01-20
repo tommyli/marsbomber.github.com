@@ -90,14 +90,14 @@ namespace :ruote do
 end
 {% endhighlight %}
 
-Last not least, mount RouteKit to our Rails app by adding the following to the routes file
+Last not least, mount RuoteKit to our Rails app by adding the following to the routes file
 {% highlight ruby %}
 # ruote-kit
 match '/_ruote' => RuoteKit::Application
 match '/_ruote/*path' => RuoteKit::Application
 {% endhighlight %}
 
-This completes first half of the story. We now have a running RabbitMQ instance with admin monitoring, and a RuoteKit enabled Rails app. The Rails app has several RuoteAMQP participants registered, a ruote rake task ready to run Ruote workers, and of course the RouteKit rack app that allows us to manually launch Ruote jobs.
+This completes first half of the story. We now have a running RabbitMQ instance with admin monitoring, and a RuoteKit enabled Rails app. The Rails app has several RuoteAMQP participants registered, a ruote rake task ready to run Ruote workers, and of course the RuoteKit rack app that allows us to manually launch Ruote jobs.
 
 In the next post, I'll complete the full picture by implementing a DaemonKit generated Ruote daemon script, which processes the AMQP jobs published by the ruote worker running on the Rails app side.
 

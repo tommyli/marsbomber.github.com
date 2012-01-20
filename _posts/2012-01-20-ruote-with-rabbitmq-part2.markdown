@@ -2,7 +2,7 @@
 layout: post
 title: Ruote workflow engine with RabbitMQ (Part 2)
 ---
-I explained how I setup Ruote and RabbitMQ in [last post](2012/01/20/ruote-with-rabbitmq-part1/). From there on, you basically already have a working system. All there's left is to have external services subscribe to the RabbitMQ job queues, parse the workitem JSON, do whatever and post the modified/amended JSON back to RabbitMQ, default queue is named "ruote_workitems", which is what the RuoteAMQP receiver listens on.
+I explained how I setup Ruote and RabbitMQ in [last post](/2012/01/20/ruote-with-rabbitmq-part1/). From there on, you basically already have a working system. All there's left is to have external services subscribe to the RabbitMQ job queues, parse the workitem JSON, do whatever and post the modified/amended JSON back to RabbitMQ, default queue is named "ruote_workitems", which is what the RuoteAMQP receiver listens on.
 
 In this post, I'll demonstrate how a DaemonKit generated daemon script consumes the RabbitMQ job messages and how we construct a DaemonKit compatible Ruote process definition.
 

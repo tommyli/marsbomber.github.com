@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>PHP to Ruby</title>
+  <title>PHP - Ruby</title>
   <meta name="viewport" content="width=1024, user-scalable=no">
 
   <!-- Replace path with correct path to deck.core.css. -->
@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="themes/transition/horizontal-slide.css" type="text/css">
   <link rel="stylesheet" href="extensions/navigation/deck.navigation.css" type="text/css">
   <link rel="stylesheet" href="extensions/status/deck.status.css" type="text/css">
+  <link rel="stylesheet" href="extensions/hash/deck.hash.css" type="text/css">
 
   <!-- <link rel="stylesheet" href="http://imakewebthings.github.com/deck.js/introduction/introduction.css" type="text/css"> -->
   <link rel="stylesheet" href="common.css" type="text/css">
@@ -31,18 +32,54 @@
 <section class="slide" id="intro">
   <div>
     <hgroup>
-      <h1>php to ruby</h1>
-      <h2>Prepared by: Jim Li</h2>
+      <h1>php - ruby</h1>
+      <h2>Prepared by: Jim Li (<a href="http://twitter.com/marsbomber">@marsbomber</a>)</h2>
     </hgroup>
   </div>
 </section>
 
-<section class="slide">
-  <h2>Title</h2>
-  <p class="slide">This is my code</p>
-  <pre class="slide"><code>a = String.new
-b = a</code></pre>
+<section class="slide" id="syntax">
+  <h2>Syntax Difference in Ruby</h2>
+  <div class="slide" id="syntax-1">
+      <p>Variables have no leading $</p>
+      <pre><code>fruit = "banana"</code></pre>
+  </div>
+  <div class="slide" id="syntax-2">
+      <p>Statements have no tailing ;</p>
+      <pre><code>fruit = "banana"</code></pre>
+  </div>
+  <div class="slide" id="syntax-3">
+      <p>Parentheses are optional.</p>
+      <pre><code>s = String.new "Banana"
+s.concat " Boat"</code></pre>
+  </div>
 </section>
+
+<section class="slide" id="oo-ruby">
+  <h2>Object Oriented - Ruby</h2>
+  <div class="slide" id="oo-ruby-1">
+    <p>Everything is an object. That includes booleans, number and even nil (null in php). This means more concise syntax. Always use method calls on objects, no function calls.</p>
+    <pre><code>> true.class  #=> TrueClass
+> 7.class     #=> Fixnum
+> nil.class   #=> NilClass</code></pre>
+  </div>
+  <div class="slide" id="oo-ruby-2">
+    <p>This allows us to do some cool things.</p>
+    <pre><code>> 2.times {|n| puts "#{n}: Ruby is cool"}
+0: Ruby is cool
+1: Ruby is cool</code></pre>
+  </div>
+</section>
+
+<section class="slide" id="oo-php">
+  <h2>Object Oriented - PHP</h2>
+  <div class="slide" id="oo-php-1">
+    <p>PHP 5 introduced OO. The language is bloated with concepts from both procedural and OO paradigm. This leads to syntactic inconsistencies.</p>
+    <pre><code>> $a = new stdClass(); echo is_object($a);  #=> 1
+> $b = true;           echo is_object($b);  #=> ...</code></pre>
+  </div>
+</section>
+
 <section class="slide">
   <h2>Title</h2>
   <p>This is my code</p>
@@ -60,6 +97,9 @@ b = a</code></pre>
   <span class="deck-status-current"></span> / <span class="deck-status-total"></span>
 </p>
 
+<!-- hash -->
+<a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+
 <!-- </article> -->
 
 
@@ -70,6 +110,7 @@ b = a</code></pre>
 <!-- Add any other extension JS files here -->
 <script src="extensions/navigation/deck.navigation.js"></script>
 <script src="extensions/status/deck.status.js"></script>
+<script src="extensions/hash/deck.hash.js"></script>
 
 <!-- Initialize the deck. You can put this in an external file if desired. -->
 <script>

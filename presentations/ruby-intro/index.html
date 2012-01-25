@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>PHP - Ruby</title>
+  <title>ruby - intro</title>
   <meta name="viewport" content="width=1024, user-scalable=no">
 
   <!-- Replace path with correct path to deck.core.css. -->
@@ -32,14 +32,14 @@
 <section class="slide" id="intro">
   <div>
     <hgroup>
-      <h1>php - ruby</h1>
+      <h1>ruby - intro</h1>
       <h2>Prepared by: Jim Li (<a href="http://twitter.com/marsbomber">@marsbomber</a>)</h2>
     </hgroup>
   </div>
 </section>
 
 <section class="slide" id="syntax">
-  <h2>Syntax Difference in Ruby</h2>
+  <h2>Ruby Syntax</h2>
   <div class="slide" id="syntax-1">
       <p>Variables have no leading $</p>
       <pre><code>fruit = "banana"</code></pre>
@@ -49,21 +49,31 @@
       <pre><code>fruit = "banana"</code></pre>
   </div>
   <div class="slide" id="syntax-3">
-      <p>Parentheses are optional.</p>
+      <p>Parentheses are optional</p>
       <pre><code>s = String.new "Banana"
 s.concat " Boat"</code></pre>
   </div>
+  <div class="slide" id="syntax-4">
+      <p>Punctuation has meanings</p>
+      <pre><code>> 1.odd?        #=> true
+> a = [1, 2]    #=> [1, 2]
+> a.reverse     #=> [2, 1]
+> a             #=> [1, 2]
+> a.reverse!    #=> [2, 1]
+> a             #=> [2, 1]
+</code></pre>
+  </div>
 </section>
 
-<section class="slide" id="oo-ruby">
-  <h2>Object Oriented - Ruby</h2>
-  <div class="slide" id="oo-ruby-1">
+<section class="slide" id="oo">
+  <h2>Object Oriented</h2>
+  <div class="slide" id="oo-1">
     <p>Everything is an object. That includes booleans, number and even nil (null in php). This means more concise syntax. Always use method calls on objects, no function calls.</p>
     <pre><code>> true.class  #=> TrueClass
 > 7.class     #=> Fixnum
 > nil.class   #=> NilClass</code></pre>
   </div>
-  <div class="slide" id="oo-ruby-2">
+  <div class="slide" id="oo-2">
     <p>This allows us to do some cool things.</p>
     <pre><code>> 2.times {|n| puts "#{n}: Ruby is cool"}
 0: Ruby is cool
@@ -71,20 +81,56 @@ s.concat " Boat"</code></pre>
   </div>
 </section>
 
-<section class="slide" id="oo-php">
-  <h2>Object Oriented - PHP</h2>
-  <div class="slide" id="oo-php-1">
-    <p>PHP 5 introduced OO. The language is bloated with concepts from both procedural and OO paradigm. This leads to syntactic inconsistencies.</p>
-    <pre><code>> $a = new stdClass(); echo is_object($a);  #=> 1
-> $b = true;           echo is_object($b);  #=> ...</code></pre>
+<section class="slide" id="open-class">
+  <h2>Open Class</h2>
+  <div class="slide" id="open-class">
+    <p>Ruby allows you to open any predefined classes to overwrite or amend methods.</p>
+  </div>
+  <div class="slide" id="open-class-1">
+    <h3>Powerful but DANGEROUS</h3>
+    <ul>
+      <li>Use in framework/library code. e.g. Dynamically define methods</li>
+      <li>Handle with care in application code! Normally there are explicit but clearer ways to achieve the same results. (Yes, that reads application DESIGN)</li>
+    </ul>
+  </div>
+  <div class="slide" id="open-class-2">
+    <h3>Sample</h3>
+    <pre><code>> class Test; def say_one; puts "one"; end; end
+> a = Test.new           #=>
+> a.say_one              #=> one
+> a.say_two              #=> NoMethodError: undefined method `say_two'
+> class Test; def say_two; puts "two"; end; end
+> a.say_two              #=> two
+</code></pre>
   </div>
 </section>
 
-<section class="slide">
-  <h2>Title</h2>
-  <p>This is my code</p>
-  <pre><code>a = String.new
-b = a</code></pre>
+<section class="slide" id="ruby-goodies">
+  <h2>Goodies I love</h2>
+
+  <div class="slide" id="ruby-goodies-string">
+    <p>String</p>
+    <pre><code>> "%s %s!" % %w[String interpolation]    #=> "String interpolation!"
+> %q[auto escape "]                      #=> "auto escape \""
+> "   space   around   ".squeeze         #=> " space around "
+> a.say_two                              #=> two
+> "a b 1 2".gsub(/[a-z]/) { $&.upcase }  #=> "A B 1 2"
+</code></pre>
+  </div>
+
+  <div class="slide" id="ruby-goodies-array">
+    <p>Array</p>
+    <pre><code>> a = [1, 2, 3, 4]             #=> [1, 2, 3, 4]
+> a.select {|e| e > 2}         #=> [3, 4]
+> a.select(&:odd?)             #=> [1, 3]
+> a.reject(&:odd?)             #=> [2, 4]
+> a.inject(&:+)                #=> 10
+> b = [nil, '', nil, 1, 3, 1]  #=> [nil, "", nil, 1, 3, 1]
+> b.compact                    #=> ["", 1, 3, 1]
+> b.uniq                       #=> [nil, "", 1, 3]
+> a & b                        #=> [1, 3]
+</code></pre>
+  </div>
 </section>
 
 <!-- Other extension HTML snippets go here, at the bottom of the deck container. -->

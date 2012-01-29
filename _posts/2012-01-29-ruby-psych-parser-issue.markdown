@@ -16,4 +16,6 @@ Using: syck
 {"defaults"=>{"cool"=>{"bang"=>"wow", "fruit"=>"apple"}}, "development"=>{"cool"=>{"fruit"=>"banana"}}}
 {% endhighlight %}
 
-You could see "development" lost its "bang" hash key. There are ways to get around the issue by re-building Ruby with libyaml flag. I consider this as harmful than helpful. So I reverted my application.yml back to its very dumb form, no default options, no merging, just duplicate all settings for all environments. It's definitely stupid to do so, but for now, it's considered as a temporary workaround.
+You could see "development" lost its "bang" hash key. 
+
+There are ways to get around the issue by re-building Ruby with libyaml flag. I consider this as harmful than helpful. So I reverted my application.yml back to its very dumb form, no default options, no merging, just duplicate all settings for all environments. It's definitely stupid to do so, but for now, it's considered as a temporary workaround.

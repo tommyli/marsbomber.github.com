@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: Install RVM Ruby on Ubuntu 11.10
 ---
 Because OS X crashes every 2nd day, I thought it's time to give Ubuntu another good spin. First task is to setup my Ruby working environment.

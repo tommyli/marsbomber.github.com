@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: Ruby basics - String
 ---
 One night, I was studying some code written by [Aleksey](https://twitter.com/spyromus). I spotted his usage of Ruby string's "%" notation. It shows me how elegant Ruby can be, given knowing all those Ruby basics.

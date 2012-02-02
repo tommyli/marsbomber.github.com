@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: Ruby basics - Array
 ---
 Here are some basic Ruby array methods that I should learn to use.

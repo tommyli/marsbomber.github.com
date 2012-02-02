@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: Ruote workflow engine with RabbitMQ (Part 1)
 ---
 At MYOB, I am assigned the task to build a component based workflow application. There are several requirements this application has to address. Here are a few

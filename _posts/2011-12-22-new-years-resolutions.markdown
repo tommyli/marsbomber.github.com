@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: New years resolutions
 ---
 Another year almost goes passed by. Time for doing this new years resolutions thing again.

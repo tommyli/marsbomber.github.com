@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: Ruby block and Regex
 ---
 Open source is fantastic! I learnt something new from reading Rails source code today again.
